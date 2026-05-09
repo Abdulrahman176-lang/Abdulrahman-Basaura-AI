@@ -1,91 +1,203 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Abdulrahman Basaura AI</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-background:black;
-color:white;
+background:#0d1117;
 font-family:Arial;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+width:95%;
+max-width:700px;
+background:#161b22;
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(255,215,0,0.2);
 text-align:center;
-padding-top:50px;
 }
 
 h1{
 color:gold;
-font-size:45px;
+margin-bottom:20px;
 }
 
-#chatbox{
-width:80%;
-max-width:500px;
-height:300px;
-background:#111;
-margin:auto;
-padding:10px;
-overflow:auto;
-border-radius:10px;
-border:1px solid gold;
-text-align:left;
+.auth{
+margin-bottom:20px;
 }
 
-input{
-width:70%;
+.auth input{
+width:90%;
 padding:12px;
+margin:8px 0;
 border:none;
 border-radius:10px;
+font-size:16px;
 }
 
 button{
 padding:12px 20px;
-background:gold;
 border:none;
 border-radius:10px;
-cursor:pointer;
+background:gold;
+color:black;
 font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+transition:0.3s;
 }
 
 button:hover{
 background:white;
+transform:scale(1.05);
 }
+
+#chatbox{
+height:350px;
+overflow-y:auto;
+background:#0d1117;
+padding:15px;
+border-radius:15px;
+border:1px solid gold;
+text-align:left;
+margin-top:20px;
+}
+
+.message{
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+max-width:80%;
+}
+
+.user{
+background:#238636;
+margin-left:auto;
+}
+
+.ai{
+background:#30363d;
+}
+
+.input-area{
+display:flex;
+margin-top:15px;
+gap:10px;
+}
+
+.input-area input{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+font-size:16px;
+}
+
+.hidden{
+display:none;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <h1>🤖 Abdulrahman Basaura AI</h1>
+
+<div class="auth" id="authBox">
+
+<input type="text" id="username" placeholder="Enter username">
+
+<input type="password" id="password" placeholder="Enter password">
+
+<button onclick="login()">Login / Signup</button>
+
+</div>
+
+<div id="app" class="hidden">
 
 <div id="chatbox"></div>
 
-<br><br>
+<div class="input-area">
 
 <input type="text" id="userInput" placeholder="Ask me anything...">
 
 <button onclick="sendMessage()">Send</button>
 
+<button onclick="startVoice()">🎤</button>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
+
+function login(){
+
+let username = document.getElementById("username").value;
+
+let password = document.getElementById("password").value;
+
+if(username.trim() === "" || password.trim() === ""){
+
+alert("Please enter username and password");
+
+return;
+
+}
+
+document.getElementById("authBox").classList.add("hidden");
+
+document.getElementById("app").classList.remove("hidden");
+
+alert("Welcome " + username + " 🚀");
+
+}
+
 function sendMessage(){
 
 let input = document.getElementById("userInput").value;
 
 let chatbox = document.getElementById("chatbox");
 
-if(input.trim() === ""){
-return;
-}
+if(input.trim() === "") return;
 
-chatbox.innerHTML += "<p><b>You:</b> " + input + "</p>";
+chatbox.innerHTML += `
+<div class="message user">
+<b>You:</b> ${input}
+</div>
+`;
 
-let reply = "I don't understand 😅";
+let reply = "Sorry, I don't understand 😅";
 
 if(input.toLowerCase().includes("hello")){
 reply = "Hello Abdulrahman 👋";
 }
 
 else if(input.toLowerCase().includes("how are you")){
-reply = "I am fine 🚀";
+reply = "I am fine and ready to help 🚀";
 }
 
 else if(input.toLowerCase().includes("who are you")){
@@ -100,12 +212,53 @@ else if(input.toLowerCase().includes("bye")){
 reply = "Goodbye Abdulrahman 👋";
 }
 
-chatbox.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+else if(input.toLowerCase().includes("ai")){
+reply = "Artificial Intelligence is the future 🌍";
+}
+
+chatbox.innerHTML += `
+<div class="message ai">
+<b>AI:</b> ${reply}
+</div>
+`;
+
+speak(reply);
 
 document.getElementById("userInput").value = "";
 
 chatbox.scrollTop = chatbox.scrollHeight;
+
 }
+
+function speak(text){
+
+let speech = new SpeechSynthesisUtterance(text);
+
+speech.lang = "en-US";
+
+window.speechSynthesis.speak(speech);
+
+}
+
+function startVoice(){
+
+let recognition = new webkitSpeechRecognition();
+
+recognition.lang = "en-US";
+
+recognition.start();
+
+recognition.onresult = function(event){
+
+document.getElementById("userInput").value =
+event.results[0][0].transcript;
+
+sendMessage();
+
+}
+
+}
+
 </script>
 
 </body>
