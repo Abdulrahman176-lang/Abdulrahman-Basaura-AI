@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,34 +6,47 @@
 
 <style>
 body{
-background: linear-gradient(to right, black, #1a1a1a);
-color: white;
-font-family: Arial;
-text-align: center;
-padding-top: 70px;
+background:black;
+color:white;
+font-family:Arial;
+text-align:center;
+padding-top:50px;
 }
 
 h1{
-color: gold;
-font-size: 50px;
+color:gold;
+font-size:45px;
 }
 
-p{
-font-size: 22px;
+#chatbox{
+width:80%;
+max-width:500px;
+height:300px;
+background:#111;
+margin:auto;
+padding:10px;
+overflow:auto;
+border-radius:10px;
+border:1px solid gold;
+}
+
+input{
+width:70%;
+padding:12px;
+border:none;
+border-radius:10px;
 }
 
 button{
-background: gold;
-color: black;
-padding: 15px 30px;
-border: none;
-border-radius: 10px;
-font-size: 20px;
-cursor: pointer;
+padding:12px 20px;
+background:gold;
+border:none;
+border-radius:10px;
+cursor:pointer;
 }
 
 button:hover{
-background: white;
+background:white;
 }
 </style>
 </head>
@@ -41,13 +55,46 @@ background: white;
 
 <h1>Abdulrahman Basaura AI</h1>
 
-<p>Welcome to the future AI platform 🚀</p>
+<div id="chatbox"></div>
 
-<button onclick="speak()">Start AI</button>
+<br><br>
+
+<input type="text" id="userInput" placeholder="Type message...">
+
+<button onclick="sendMessage()">Send</button>
 
 <script>
-function speak(){
-alert("Welcome Abdulrahman Basaura AI is now active!");
+function sendMessage(){
+
+let input = document.getElementById("userInput").value;
+
+let chatbox = document.getElementById("chatbox");
+
+if(input.trim() === ""){
+return;
+}
+
+chatbox.innerHTML += "<p><b>You:</b> " + input + "</p>";
+
+let reply = "Hello Abdulrahman 👋";
+
+if(input.toLowerCase().includes("hello")){
+reply = "Hello Abdulrahman 👋 How are you?";
+}
+
+if(input.toLowerCase().includes("who are you")){
+reply = "I am Abdulrahman Basaura AI 🤖";
+}
+
+if(input.toLowerCase().includes("name")){
+reply = "Your name is Abdulrahman Basaura ❤️";
+}
+
+chatbox.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
+
+document.getElementById("userInput").value = "";
+
+chatbox.scrollTop = chatbox.scrollHeight;
 }
 </script>
 
