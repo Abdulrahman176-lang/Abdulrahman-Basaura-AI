@@ -28,6 +28,7 @@ padding:10px;
 overflow:auto;
 border-radius:10px;
 border:1px solid gold;
+text-align:left;
 }
 
 input{
@@ -43,6 +44,7 @@ background:gold;
 border:none;
 border-radius:10px;
 cursor:pointer;
+font-weight:bold;
 }
 
 button:hover{
@@ -53,13 +55,13 @@ background:white;
 
 <body>
 
-<h1>Abdulrahman Basaura AI</h1>
+<h1>🤖 Abdulrahman Basaura AI</h1>
 
 <div id="chatbox"></div>
 
 <br><br>
 
-<input type="text" id="userInput" placeholder="Type message...">
+<input type="text" id="userInput" placeholder="Ask me anything...">
 
 <button onclick="sendMessage()">Send</button>
 
@@ -76,18 +78,26 @@ return;
 
 chatbox.innerHTML += "<p><b>You:</b> " + input + "</p>";
 
-let reply = "Hello Abdulrahman 👋";
+let reply = "I don't understand 😅";
 
 if(input.toLowerCase().includes("hello")){
-reply = "Hello Abdulrahman 👋 How are you?";
+reply = "Hello Abdulrahman 👋";
 }
 
-if(input.toLowerCase().includes("who are you")){
+else if(input.toLowerCase().includes("how are you")){
+reply = "I am fine 🚀";
+}
+
+else if(input.toLowerCase().includes("who are you")){
 reply = "I am Abdulrahman Basaura AI 🤖";
 }
 
-if(input.toLowerCase().includes("name")){
+else if(input.toLowerCase().includes("name")){
 reply = "Your name is Abdulrahman Basaura ❤️";
+}
+
+else if(input.toLowerCase().includes("bye")){
+reply = "Goodbye Abdulrahman 👋";
 }
 
 chatbox.innerHTML += "<p><b>AI:</b> " + reply + "</p>";
@@ -100,3 +110,4 @@ chatbox.scrollTop = chatbox.scrollHeight;
 
 </body>
 </html>
+
