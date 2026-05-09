@@ -30,7 +30,7 @@ headers: {
 body: JSON.stringify({
 contents: [{
 parts: [{
-text: "You are Abdulrahman Basaura AI. Reply intelligently in any language. Be smart and friendly. User message: " + input
+text: "You are Abdulrahman Basaura AI. Reply intelligently in any language. User message: " + input
 }]
 }]
 })
@@ -39,9 +39,7 @@ text: "You are Abdulrahman Basaura AI. Reply intelligently in any language. Be s
 
 const data = await response.json();
 
-let reply =
-data.candidates?.[0]?.content?.parts?.[0]?.text
-|| "Hello 👋 How can I help you?";
+let reply = data.candidates[0].content.parts[0].text;
 
 chatbox.innerHTML += `
 <div class="message ai">
@@ -49,20 +47,16 @@ chatbox.innerHTML += `
 </div>
 `;
 
-speak(reply);
-
 chatbox.scrollTop = chatbox.scrollHeight;
 
 } catch(error){
 
 chatbox.innerHTML += `
 <div class="message ai">
-<b>AI:</b> Connection error ⚠️
+<b>AI:</b> Error connecting to AI ⚠️
 </div>
 `;
-
 }
-
 }
 
 function speak(text){
@@ -75,5 +69,7 @@ window.speechSynthesis.speak(speech);
 
 }
 
-</script></body>
+</script>
+
+</body>
 </html>
