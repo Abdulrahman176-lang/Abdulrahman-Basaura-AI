@@ -1,5 +1,123 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Abdulrahman Basaura AI</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#0d1117;
+font-family:Arial;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+width:95%;
+max-width:700px;
+background:#161b22;
+padding:20px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(255,215,0,0.2);
+text-align:center;
+}
+
+h1{
+color:gold;
+margin-bottom:20px;
+}
+
+#chatbox{
+height:350px;
+overflow-y:auto;
+background:#0d1117;
+padding:15px;
+border-radius:15px;
+border:1px solid gold;
+text-align:left;
+margin-bottom:15px;
+}
+
+.message{
+margin:10px 0;
+padding:10px;
+border-radius:10px;
+}
+
+.user{
+background:#21262d;
+}
+
+.ai{
+background:#30363d;
+}
+
+.input-area{
+display:flex;
+gap:10px;
+}
+
+input{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+font-size:16px;
+outline:none;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:gold;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:white;
+transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 Abdulrahman Basaura AI</h1>
+
+<div id="chatbox"></div>
+
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Ask me anything...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+
 <script>
+
+const API_KEY = "AIzaSyDOOmsK5R1-rgSvVjQS2JsNp8lYB657qeM";
+
+async
 
 async function sendMessage(){
 
@@ -18,7 +136,7 @@ chatbox.innerHTML += `
 document.getElementById("userInput").value = "";
 
 const response = await fetch(
-"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=SAKA_API_KEY_A_NAN",
+"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY,
 {
 method: "POST",
 headers: {
@@ -27,7 +145,7 @@ headers: {
 body: JSON.stringify({
 contents: [{
 parts: [{
-text: "You are Abdulrahman Basaura AI. Reply intelligently in any language the user speaks. Answer questions clearly like ChatGPT. Be smart, friendly, respectful and modern. Abdulrahman Basaura is from Basaura town under Jega Local Government, Kebbi State, Nigeria. His neighborhood is Kade Area Basaura. His father's name was Mu'azu Aliyu. He died in a road accident on the road between Basaura and Kalgo when Abdulrahman was still young. His mother's name was Aisha Muhammad. She died after an illness while Abdulrahman was still young. His siblings are Sani, Abubakar, Umar, Usman, Aliyu, Fatima, Aisha and Nafsa. His closest friends in Basaura are Salim Sani and Sa'adu Salisu. Always reply politely, intelligently and naturally like a modern AI assistant. User message: " + input
+text: "You are Abdulrahman Basaura AI. Reply intelligently in any language the user speaks. Answer questions clearly like ChatGPT. Be smart, friendly and respectful. Abdulrahman Basaura is from Basaura town under Jega Local Government, Kebbi State, Nigeria. User message: " + input
 }]
 }]
 })
@@ -62,3 +180,6 @@ window.speechSynthesis.speak(speech);
 }
 
 </script>
+
+</body>
+</html>
